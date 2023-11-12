@@ -1,6 +1,11 @@
+pub mod base_attribute;
 pub mod character;
 pub mod generation_base;
+pub mod profession;
+pub mod profession_class;
 pub mod skill;
+pub mod skill_definition;
 pub mod species;
 pub mod talent;
+pub mod talent_definition;
 pub mod trapping;
