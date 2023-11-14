@@ -76,6 +76,14 @@ impl Command {
         }
     }
     
+    pub fn command_description(&self) -> String {
+        let args_desc = match self {
+            Command::GenerateNpc => "<professions> <species>",
+        };
+        
+        format!("{} [{}]", self.to_str(), args_desc)
+    }
+
     fn command_params_count(&self) -> usize {
         match self {
             Command::GenerateNpc => 2,
@@ -101,40 +109,42 @@ impl Command {
         Ok(self)
     }
 }
+#[cfg(test)]
+mod test {
+    use super::*;
+    #[test] 
+    fn parse_generate_npc_command() {
+        let args:Vec<String> =vec!["generate-npc".into(), "your_mother_3 your_father_2".into(), "thebest".into()];
+        assert_eq!(Command::parse_command(&args, None),Ok(Command::GenerateNpc));
+    }
 
+    #[test] 
+    fn parse_generate_npc_command_invalid_arguments() {
+        let args:Vec<String> =vec!["generate-npc".into(), "your_father_8 your_mother_2".into(), "thebest".into()];
+        assert_eq!(Command::parse_command(&args, None), Err(CommandError::InvalidArguments));
+    }
 
-#[test] 
-fn parse_generate_npc_command() {
-    let args:Vec<String> =vec!["generate-npc".into(), "your_mother_3 your_father_2".into(), "thebest".into()];
-    assert_eq!(Command::parse_command(&args, None),Ok(Command::GenerateNpc));
-}
+    #[test] 
+    fn parse_generate_npc_command_too_few_arguments() {
+        let args:Vec<String> =vec!["generate-npc".into(), "thebest".into()];
+        assert_eq!(Command::parse_command(&args, None), Err(CommandError::TooFewArguments(1, 2)));
+    }
 
-#[test] 
-fn parse_generate_npc_command_invalid_arguments() {
-    let args:Vec<String> =vec!["generate-npc".into(), "your_father_8 your_mother_2".into(), "thebest".into()];
-    assert_eq!(Command::parse_command(&args, None), Err(CommandError::InvalidArguments));
-}
+    #[test] 
+    fn generate_npc_command_too_many_arguments() {
+        let args:Vec<String> =vec!["generate-npc".into(), "warrior_1".into(), "warrior_1".into(), "thebest".into()];
+        assert_eq!(Command::parse_command(&args, None), Err(CommandError::TooManyArguments(3, 2)));
+    }
 
-#[test] 
-fn parse_generate_npc_command_too_few_arguments() {
-    let args:Vec<String> =vec!["generate-npc".into(), "thebest".into()];
-    assert_eq!(Command::parse_command(&args, None), Err(CommandError::TooFewArguments(1, 2)));
-}
+    #[test] 
+    fn parse_command_command_missing() {
+        let args:Vec<String> =vec![];
+        assert_eq!(Command::parse_command(&args, None), Err(CommandError::EmptyCommand));
+    }
 
-#[test] 
-fn generate_npc_command_too_many_arguments() {
-    let args:Vec<String> =vec!["generate-npc".into(), "warrior_1".into(), "warrior_1".into(), "thebest".into()];
-    assert_eq!(Command::parse_command(&args, None), Err(CommandError::TooManyArguments(3, 2)));
-}
-
-#[test] 
-fn parse_command_command_missing() {
-    let args:Vec<String> =vec![];
-    assert_eq!(Command::parse_command(&args, None), Err(CommandError::EmptyCommand));
-}
-
-#[test] 
-fn parse_command_invalid_command() {
-    let args:Vec<String> =vec!["nan-is-a-great-return-type-for-division-in-dynamically-typed-languages-especially-if-it-is-not-directly-comparable-with-integers-nor-itself-and-you-detect-it-at-runtime".into()];
-    assert_eq!(Command::parse_command(&args, None), Err(CommandError::InvalidCommand));
+    #[test] 
+    fn parse_command_invalid_command() {
+        let args:Vec<String> =vec!["nan-is-a-great-return-type-for-division-in-dynamically-typed-languages-especially-if-it-is-not-directly-comparable-with-integers-nor-itself-and-you-detect-it-at-runtime".into()];
+        assert_eq!(Command::parse_command(&args, None), Err(CommandError::InvalidCommand));
+    }
 }

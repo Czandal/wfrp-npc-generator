@@ -68,44 +68,48 @@ impl<'a> GenerateNpcCommandArgs<'a> {
 
 
 
-#[test] 
-fn is_valid_profession() {
-    assert_eq!(GenerateNpcCommandArgs::is_valid_profession("a_b_3"),true);
-}
+#[cfg(test)]
+mod test {
+    use super::*;
+    #[test] 
+    fn is_valid_profession() {
+        assert_eq!(GenerateNpcCommandArgs::is_valid_profession("a_b_3"),true);
+    }
 
-#[test] 
-fn is_not_valid_profession() {
-    assert_eq!(GenerateNpcCommandArgs::is_valid_profession("a_b_4"),false);
-}
+    #[test] 
+    fn is_not_valid_profession() {
+        assert_eq!(GenerateNpcCommandArgs::is_valid_profession("a_b_4"),false);
+    }
 
-#[test] 
-fn proffessions() {
-    let proffessions_string: Vec<String> = vec!["aaaa bb_bb".into()];
-    let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
-    let proffessions: Vec<&str> = generate_npc_command_args.proffessions(None).unwrap().collect();
-    assert_eq!(proffessions,(vec!["aaaa", "bb_bb"]));
-}
+    #[test] 
+    fn proffessions() {
+        let proffessions_string: Vec<String> = vec!["aaaa bb_bb".into()];
+        let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
+        let proffessions: Vec<&str> = generate_npc_command_args.proffessions(None).unwrap().collect();
+        assert_eq!(proffessions,(vec!["aaaa", "bb_bb"]));
+    }
 
-#[test] 
-fn validate_proffessions() {
-    let proffessions_string: Vec<String> = vec!["generate-npc".into(), "aaaa_1 bb_bb_2".into(), "aaaa".into()];
-    let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
-    
-    assert_eq!(generate_npc_command_args.validate_proffessions(Some(1)).is_ok(), true);
-}
+    #[test] 
+    fn validate_proffessions() {
+        let proffessions_string: Vec<String> = vec!["generate-npc".into(), "aaaa_1 bb_bb_2".into(), "aaaa".into()];
+        let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
+        
+        assert_eq!(generate_npc_command_args.validate_proffessions(Some(1)).is_ok(), true);
+    }
 
-#[test] 
-fn species() {
-    let proffessions_string: Vec<String> = vec!["aaaa bb_bb".into(), "asdas".into()];
-    let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
-    let proffessions: Vec<&str> = generate_npc_command_args.proffessions(None).unwrap().collect();
-    assert_eq!(proffessions,(vec!["aaaa", "bb_bb"]));
-}
+    #[test] 
+    fn species() {
+        let proffessions_string: Vec<String> = vec!["aaaa bb_bb".into(), "asdas".into()];
+        let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
+        let proffessions: Vec<&str> = generate_npc_command_args.proffessions(None).unwrap().collect();
+        assert_eq!(proffessions,(vec!["aaaa", "bb_bb"]));
+    }
 
-#[test] 
-fn validate_species() {
-    let proffessions_string: Vec<String> = vec!["generate-npc".into(), "aaaa_1 bb_bb_2".into(), "aaaa".into()];
-    let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
-    
-    assert_eq!(generate_npc_command_args.validate_species(Some(1)).is_ok(), true);
+    #[test] 
+    fn validate_species() {
+        let proffessions_string: Vec<String> = vec!["generate-npc".into(), "aaaa_1 bb_bb_2".into(), "aaaa".into()];
+        let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
+        
+        assert_eq!(generate_npc_command_args.validate_species(Some(1)).is_ok(), true);
+    }
 }
