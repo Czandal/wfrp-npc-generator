@@ -102,7 +102,7 @@ impl Command {
             Command::GenerateNpc => {
                 let arg_offset = Some(1);
 
-                GenerateNpcCommandArgs(args).validate_proffessions(arg_offset)?;
+                GenerateNpcCommandArgs(args).validate_professions(arg_offset)?;
                 GenerateNpcCommandArgs(args).validate_species(arg_offset)?;
             }
         }

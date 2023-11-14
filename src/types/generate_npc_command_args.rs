@@ -15,11 +15,11 @@ impl<'a> std::ops::Deref for GenerateNpcCommandArgs<'a> {
 }
 
 impl<'a> GenerateNpcCommandArgs<'a> {
-    pub fn proffessions(&self, arg_offset: Option<usize>)->Option<std::str::Split<char>> {
+    pub fn professions(&self, arg_offset: Option<usize>)->Option<std::str::Split<char>> {
         let arg_offset = if let Some(arg_offset) = arg_offset { arg_offset } else { 0 };
 
-        if let Some(proffessions) = self.0.iter().skip(arg_offset).next() {
-            return Some(proffessions.split(' '))
+        if let Some(professions) = self.0.iter().skip(arg_offset).next() {
+            return Some(professions.split(' '))
         }
         else  {
             return None
@@ -37,8 +37,8 @@ impl<'a> GenerateNpcCommandArgs<'a> {
         }
     }
 
-    pub fn validate_proffessions(&self, arg_offset: Option<usize>)->Result<&Self, CommandError> {
-        if let Some(_invalid_argument) = self.proffessions(arg_offset)
+    pub fn validate_professions(&self, arg_offset: Option<usize>)->Result<&Self, CommandError> {
+        if let Some(_invalid_argument) = self.professions(arg_offset)
                                                    .unwrap() // Should be checked before calling the function
                                                    .find(|profession| !Self::is_valid_profession(profession)) {
                                                         Err(CommandError::InvalidArguments)?
@@ -82,33 +82,33 @@ mod test {
     }
 
     #[test] 
-    fn proffessions() {
-        let proffessions_string: Vec<String> = vec!["aaaa bb_bb".into()];
-        let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
-        let proffessions: Vec<&str> = generate_npc_command_args.proffessions(None).unwrap().collect();
-        assert_eq!(proffessions,(vec!["aaaa", "bb_bb"]));
+    fn professions() {
+        let professions_string: Vec<String> = vec!["aaaa bb_bb".into()];
+        let generate_npc_command_args = GenerateNpcCommandArgs(&professions_string);
+        let professions: Vec<&str> = generate_npc_command_args.professions(None).unwrap().collect();
+        assert_eq!(professions,(vec!["aaaa", "bb_bb"]));
     }
 
     #[test] 
-    fn validate_proffessions() {
-        let proffessions_string: Vec<String> = vec!["generate-npc".into(), "aaaa_1 bb_bb_2".into(), "aaaa".into()];
-        let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
+    fn validate_professions() {
+        let professions_string: Vec<String> = vec!["generate-npc".into(), "aaaa_1 bb_bb_2".into(), "aaaa".into()];
+        let generate_npc_command_args = GenerateNpcCommandArgs(&professions_string);
         
-        assert_eq!(generate_npc_command_args.validate_proffessions(Some(1)).is_ok(), true);
+        assert_eq!(generate_npc_command_args.validate_professions(Some(1)).is_ok(), true);
     }
 
     #[test] 
     fn species() {
-        let proffessions_string: Vec<String> = vec!["aaaa bb_bb".into(), "asdas".into()];
-        let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
-        let proffessions: Vec<&str> = generate_npc_command_args.proffessions(None).unwrap().collect();
-        assert_eq!(proffessions,(vec!["aaaa", "bb_bb"]));
+        let professions_string: Vec<String> = vec!["aaaa bb_bb".into(), "asdas".into()];
+        let generate_npc_command_args = GenerateNpcCommandArgs(&professions_string);
+        let professions: Vec<&str> = generate_npc_command_args.professions(None).unwrap().collect();
+        assert_eq!(professions,(vec!["aaaa", "bb_bb"]));
     }
 
     #[test] 
     fn validate_species() {
-        let proffessions_string: Vec<String> = vec!["generate-npc".into(), "aaaa_1 bb_bb_2".into(), "aaaa".into()];
-        let generate_npc_command_args = GenerateNpcCommandArgs(&proffessions_string);
+        let professions_string: Vec<String> = vec!["generate-npc".into(), "aaaa_1 bb_bb_2".into(), "aaaa".into()];
+        let generate_npc_command_args = GenerateNpcCommandArgs(&professions_string);
         
         assert_eq!(generate_npc_command_args.validate_species(Some(1)).is_ok(), true);
     }

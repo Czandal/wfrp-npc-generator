@@ -65,19 +65,19 @@ mod test {
 
     #[test] 
     fn app_invalid_arguments() {
-        let invalid_command:Vec<String> =vec!["app_name".into(), "generate-npc".into(), "proffesions".into(), "species".into()];
+        let invalid_command:Vec<String> =vec!["app_name".into(), "generate-npc".into(), "profession".into(), "species".into()];
         assert_eq!(App::new().run(invalid_command.into_iter()).unwrap_err(), CommandError::InvalidArguments)
     }
 
     #[test] 
     fn app_too_few_arguments() {
-        let invalid_command:Vec<String> =vec!["app_name".into(), "generate-npc".into(), "proffesions".into()];
+        let invalid_command:Vec<String> =vec!["app_name".into(), "generate-npc".into(), "profession".into()];
         assert_eq!(App::new().run(invalid_command.into_iter()).unwrap_err(), CommandError::TooFewArguments(1, 2))
     }
 
     #[test] 
     fn app_too_many_arguments() {
-        let invalid_command:Vec<String> =vec!["app_name".into(), "generate-npc".into(), "proffesions".into(), "species".into(), "mine_is_bigger".into()];
+        let invalid_command:Vec<String> =vec!["app_name".into(), "generate-npc".into(), "profession".into(), "species".into(), "mine_is_bigger".into()];
         assert_eq!(App::new().run(invalid_command.into_iter()).unwrap_err(), CommandError::TooManyArguments(3, 2))
     }
 }
