@@ -1,7 +1,4 @@
-use std::process::Command;
-
-use crate::models::{consts::{MIN_PROFESSION_LEVEL, MAX_PROFESSION_LEVEL}, profession};
-
+use crate::models::consts::{MIN_PROFESSION_LEVEL, MAX_PROFESSION_LEVEL};
 use super::command::CommandError;
 
 
