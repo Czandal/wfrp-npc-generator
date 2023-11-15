@@ -2,8 +2,7 @@ use rand::Rng;
 use crate::models::generation_base::GenerationBase;
 use crate::interfaces::random_provider::RandomProvider;
 
-pub struct ThreadBasedRandomProvider {
-}
+pub struct ThreadBasedRandomProvider {}
 
 impl RandomProvider for ThreadBasedRandomProvider {
     fn generate(&self, base: &GenerationBase) -> u32 {
