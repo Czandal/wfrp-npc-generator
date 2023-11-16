@@ -1,4 +1,5 @@
 use crate::models::generation_base::GenerationBase;
+use crate::interfaces::random_provider::RandomProvider;
 
 mod interfaces;
 mod models;
