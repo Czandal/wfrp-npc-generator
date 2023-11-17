@@ -1,0 +1,2 @@
+pub const MIN_PROFESSION_LEVEL: u32 = 1;
+pub const MAX_PROFESSION_LEVEL: u32 = 4;

@@ -1,5 +1,6 @@
 pub mod base_attribute;
 pub mod character;
+pub mod consts;
 pub mod generation_base;
 pub mod profession;
 pub mod profession_class;
