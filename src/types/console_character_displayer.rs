@@ -104,6 +104,7 @@ impl CharacterDisplayer<String> for ConsoleCharacterDisplayer {
     }
 }
 
+#[cfg(test)]
 pub mod test {
     use super::*;
 
