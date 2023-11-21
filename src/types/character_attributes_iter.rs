@@ -15,6 +15,7 @@ impl <'a> CharacterAttributesIter<'a> {
     }
 }
 
+//Just a trash ignore
 pub struct CharacterAttribute {
     pub name: &'static str,
     pub level: u32
@@ -84,4 +85,3 @@ mod test {
                         "Movement",]);
     }
 }
-

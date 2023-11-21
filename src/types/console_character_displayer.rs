@@ -117,5 +117,54 @@ pub mod test {
         let talents = vec![Talent{name: "Tal".into(), level: 1, max_level: 3, description: "Desc".into()}];
         assert_eq!(ConsoleCharacterDisplayer::create_talent_table(&talents), "Talent        |Tal|\nLevels        |1  |\n") 
     }
+    #[test]
+    fn print_character() {
+        let character = Character {
+            talents: vec![Talent{name: "OtherTalent1".into(), level: 1, max_level: 2, description: "Desc".into(),},
+                          Talent{name: "Talent31".into(), level: 1, max_level: 2, description: "Desc".into()},],
+            skills: vec![Skill{name: "Skill1".into(), value: 32, base_attribute: crate::models::base_attribute::BaseAttribute::Agility},
+                         Skill{name: "OtherSkill2".into(), value: 32, base_attribute: crate::models::base_attribute::BaseAttribute::BallisticSkill},],
+            trappings: vec![Trapping{name: "Tropp1".into(), count: 2}, Trapping{name: "Tropp2".into(), count: 2},],
+            ballistic_skill: 1,
+            weapon_skill: 1,
+            strength: 1,
+            toughness: 1,
+            initiative: 1,
+            agility: 1,
+            dexterity: 2,
+            intelligence: 1,
+            willpower: 3,
+            fellowship: 3,
+            wounds: 2,
+            movement: 1
+        };
+        assert_eq!(ConsoleCharacterDisplayer::new().print(&character), 
+        "---Talents---
+
+Talent        |OtherTalent1|Talent31    |
+Levels        |1           |1           |
+
+---Skills---
+
+Skill         |Skill1     |OtherSkill2|
+Values        |32         |32         |
+
+---Trappings---
+
+Trapping      |Tropp1|Tropp2|
+Count         |2     |2     |
+
+---General Skills---
+
+General Skill |Weapon Skill   |Ballistic Skill|Strength       |
+Level         |1              |1              |1              |
+General Skill |Toughness      |Initiative     |Agility        |
+Level         |1              |1              |1              |
+General Skill |Dexterity      |Intelligence   |Willpower      |
+Level         |2              |1              |3              |
+General Skill |FellowShip     |Wounds         |Movement       |
+Level         |3              |2              |1              |
+"               )
+    }
 }
 
