@@ -1,4 +1,4 @@
-use std:: slice::Iter;
+use std::slice::Iter;
 
 use super::generate_npc_command_args::GenerateNpcCommandArgs;
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

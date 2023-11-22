@@ -1,5 +1,6 @@
 use super::{talent::Talent, skill::Skill, trapping::Trapping};
 
+#[derive(Debug)]
 pub struct Character {
     pub talents: Vec<Talent>,
     pub skills: Vec<Skill>,
