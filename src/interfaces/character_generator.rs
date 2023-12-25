@@ -1,5 +1,5 @@
 use crate::models::{character::Character, profession::Profession, species::Species};
 
 pub trait CharacterGenerator{
-    fn generate(&self, professions: &Vec<Profession>, species: &Species) -> Character;
+    fn generate<'a>(&self, professions: &Vec<Profession<'a>>, species: &'a Species) -> Character<'a>;
 }

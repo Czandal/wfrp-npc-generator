@@ -1,9 +1,9 @@
 use super::{talent::Talent, skill::Skill, trapping::Trapping};
 
-pub struct Character {
-    pub talents: Vec<Talent>,
-    pub skills: Vec<Skill>,
-    pub trappings: Vec<Trapping>,
+pub struct Character<'a> {
+    pub talents: Vec<Talent<'a>>,
+    pub skills: Vec<Skill<'a>>,
+    pub trappings: Vec<Trapping<'a>>,
 
     // attributes
     pub weapon_skill: u32,
