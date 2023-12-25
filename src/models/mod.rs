@@ -2,6 +2,7 @@ pub mod base_attribute;
 pub mod character;
 pub mod consts;
 pub mod generation_base;
+pub mod max_talent_level;
 pub mod profession;
 pub mod profession_class;
 pub mod skill;

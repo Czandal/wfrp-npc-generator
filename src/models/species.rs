@@ -1,7 +1,7 @@
-use super::{generation_base::GenerationBase, trapping::Trapping, talent::Talent, skill::Skill};
+use super::{generation_base::GenerationBase, trapping::Trapping, skill::Skill, talent_definition::TalentDefinition};
 
-pub struct Species {
-    pub name: String,
+pub struct Species<'a> {
+    pub name: &'a str,
 
     // attributes
     pub weapon_skill: GenerationBase,
@@ -14,10 +14,9 @@ pub struct Species {
     pub intelligence: GenerationBase,
     pub willpower: GenerationBase,
     pub fellowship: GenerationBase,
-    pub wounds: GenerationBase,
     pub movement: u32,
 
-    pub trappings: Vec<Trapping>,
-    pub possible_talents: Vec<Talent>,
-    pub possible_skills: Vec<Skill>,
+    pub trappings: Vec<Trapping<'a>>,
+    pub possible_talents: Vec<TalentDefinition<'a>>,
+    pub possible_skills: Vec<Skill<'a>>,
 }

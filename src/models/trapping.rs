@@ -1,1 +1,4 @@
-pub struct Trapping { name: String, count: u32 }
+#[derive(Clone)]
+pub struct Trapping<'a> {
+    name: &'a str,
+}

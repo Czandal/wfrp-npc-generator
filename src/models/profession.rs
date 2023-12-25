@@ -1,12 +1,12 @@
-use super::{trapping::Trapping, skill_definition::SkillDefinition, talent_definition::TalentDefinition, profession_class::ProfessionClass};
+use super::{trapping::Trapping, skill_definition::SkillDefinition, talent_definition::TalentDefinition, profession_class::ProfessionClass, base_attribute::BaseAttribute};
 
-// TODO: Fill it with data
-pub struct Profession {
-    pub trappings: Vec<Trapping>,
-    pub skills: Vec<SkillDefinition>,
-    pub talents: Vec<TalentDefinition>,
+pub struct Profession<'a> {
+    pub trappings: Vec<Trapping<'a>>,
+    pub skills: Vec<SkillDefinition<'a>>,
+    pub talents: Vec<TalentDefinition<'a>>,
 
     pub profession_level: u8,
-    pub name: String,
-    pub class: ProfessionClass,
+    pub attributes: Vec<BaseAttribute>,
+    pub name: &'a str,
+    pub class: ProfessionClass<'a>,
 }
